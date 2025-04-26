@@ -28,14 +28,28 @@
 # RUN chmod +x /worker.py
 
 # CMD ["python", "/worker.py"]
+# FROM ubuntu:20.04
+
+# ENV DEBIAN_FRONTEND=noninteractive
+
+# RUN apt-get update && \
+#     apt-get install -y curl ca-certificates python2-minimal dnsutils && \
+#     apt-get install -y --no-install-recommends \
+#     amqp-tools || true && \
+#     rm -rf /var/lib/apt/lists/*
+
+# COPY ./worker.py /worker.py
+# RUN chmod +x /worker.py
+
+# CMD ["/usr/bin/amqp-consume", "--url=${BROKER_URL}", "-q", "${QUEUE}", "-c", "1", "/worker.py"]
 FROM ubuntu:20.04
 
+# Fix không hỏi interactive khi cài gói
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -y curl ca-certificates python2-minimal dnsutils && \
-    apt-get install -y --no-install-recommends \
-    amqp-tools || true && \
+    apt-get install -y curl ca-certificates python2 dnsutils && \
+    apt-get install -y --no-install-recommends amqp-tools && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ./worker.py /worker.py
