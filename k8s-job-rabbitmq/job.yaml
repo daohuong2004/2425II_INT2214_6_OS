@@ -5,6 +5,7 @@ kind: Job
 metadata:
   name: job-wq-1
 spec:
+  ttlSecondsAfterFinished: 3600   # 3600 giây = giữ lại Pod trong 1 tiếng sau khi xong
   completions: 8
   parallelism: 2
   template:

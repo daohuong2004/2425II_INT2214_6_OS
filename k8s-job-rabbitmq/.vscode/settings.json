@@ -1,8 +1,0 @@
-{
-    "DockerRun.DisableDockerrc": true,
-    "DockerRun.Containers": [
-        "ff1e1690b6ac",
-        "fbafcda56e8b",
-        "7501e4e3a045"
-    ]
-}

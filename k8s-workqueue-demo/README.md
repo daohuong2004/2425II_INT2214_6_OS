@@ -62,12 +62,21 @@ Trước tiên, bạn cần triển khai Redis trong cụm Kubernetes của mìn
 kubectl apply -f https://k8s.io/examples/application/job/redis/redis-pod.yaml
 kubectl apply -f https://k8s.io/examples/application/job/redis/redis-service.yaml
 ```
+```
+kubectl delete -f redis-pod.yaml
+kubectl delete -f redis-service.yaml
+```
+```
+```
 Hai lệnh này sẽ triển khai một Pod Redis và một dịch vụ để các Pod khác có thể giao tiếp với Redis.
 ### Bước 2: Điền Hàng Đợi Redis
 Bạn cần điền vào hàng đợi Redis với các nhiệm vụ. Khởi động một Pod tạm thời để truy cập Redis CLI:
 ```
 kubectl run -i --tty temp --image redis --command "/bin/sh"
 
+```
+```
+kubectl delete pod temp
 ```
 Khi shell đã sẵn sàng, kết nối đến instance Redis và thêm các nhiệm vụ:
 ```
@@ -77,9 +86,10 @@ rpush job2 "task2"
 ... (add more tasks as needed) ...
 lrange job2 0 -1
 ```
-Sau khi đã hoàn thành, thoát khỏi session tương tác bằng lệnh:
+Sau khi đã hoàn thành, thoát khỏi session tương tác bằng lệnh: (Exit hết đến thư mục chứa nó)
 ```
 exit
+
 ### Bước 3: Xây Dựng Và Đẩy Docker Image
 Bây giờ bạn cần xây dựng Docker image chứa ứng dụng công việc của mình. Đây là lệnh để thực hiện điều đó:
 
@@ -128,7 +138,7 @@ kubectl describe jobs/job-wq-2
 Để xem logs của các Pod và theo dõi tiến độ, sử dụng lệnh sau:
 
 ```
-kubectl logs -f job-name=job-wq-2
+kubectl logs -f job-wq-2...( điền theo đúng tên đã hiện )
 ```
 
 ### Bước 6: Dọn Dẹp

@@ -63,6 +63,9 @@ Tạo Service và StatefulSet cho RabbitMQ bằng các lệnh sau:
 kubectl create -f https://kubernetes.io/examples/application/job/rabbitmq/rabbitmq-service.yaml
 kubectl create -f https://kubernetes.io/examples/application/job/rabbitmq/rabbitmq-statefulset.yaml
 ```
+kubectl apply -f rabbitmq-service.yaml
+kubectl apply -f rabbitmq-statefulset.yaml
+
 ### Bước 2: Tạo Pod Tạm Thời và Cài Đặt Công Cụ
 ```
 kubectl run -i --tty temp --image ubuntu:22.04
